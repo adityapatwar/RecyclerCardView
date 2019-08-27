@@ -1,5 +1,6 @@
 package com.example.recyclercardview;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
 
         //setting untuk improve perfomance
 
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         //using a linear layout manager
         mLayoutManager = new LinearLayoutManager (this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
         //intializing an arraylist called songlist
         songList = new ArrayList<> ();
         for (int i = 0; i < names.length; i++) {
@@ -85,35 +87,34 @@ public class MainActivity extends AppCompatActivity {
                 }));
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-//        menuInflater.inflate(R.layout.activity_main, menu);
-        return super.onCreateOptionsMenu(menu);
+        menuInflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu (menu);
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
 
-//            case R.id.item_grid:
-//                mLayoutManager = new GridLayoutManager (this, 2);
-//                mRecyclerView.setLayoutManager(mLayoutManager);
-//                break;
-//
-//            case R.id.item_staggered_grid:
-//                mLayoutManager = new StaggeredGridLayoutManager (2,
-//                        StaggeredGridLayoutManager.VERTICAL);
-//                mRecyclerView.setLayoutManager(mLayoutManager);
-//                break;
-//
-//            case R.id.item_horizontal:
-//                mLayoutManager = new
-//                        LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false);
-//                mRecyclerView.setLayoutManager(mLayoutManager);
-//                break;
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_grid:
+                mLayoutManager = new GridLayoutManager (this, 2);
+                mRecyclerView.setLayoutManager(mLayoutManager);
+                break;
+            case R.id.item_staggered_grid:
+                mLayoutManager = new StaggeredGridLayoutManager (2, StaggeredGridLayoutManager.VERTICAL);
+                mRecyclerView.setLayoutManager(mLayoutManager);
+                break;
+            case R.id.item_horizontal:
+                mLayoutManager = new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false);
+                mRecyclerView.setLayoutManager(mLayoutManager);
+                break;
         }
-        return super.onOptionsItemSelected(item);
+
+        return super.onOptionsItemSelected (item);
     }
+
 }
 
 
